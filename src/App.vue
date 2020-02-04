@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <transition name="silde">
+      <compontent :is="getActiveSlide" />
+    </transition>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import { mapGetters } from 'vuex';
+import home from './components/home/home.vue';
+import setup from './components/setup/setup.vue';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+    home,
+    setup,
+  },
+  computed: {
+    ...mapGetters([
+      'getActiveSlide',
+    ]),
   },
 };
 </script>
