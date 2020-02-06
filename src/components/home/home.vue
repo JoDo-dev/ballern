@@ -9,7 +9,7 @@
                 <input type="text" v-model="name"/>
             </label>
             <div>
-                <button type="button" @click="setActiveSlide('setup')">Los geht´s</button>
+                <button type="button" @click="enterSetup">Los geht´s</button>
             </div>
         </form>
     </div>
@@ -27,7 +27,19 @@ export default {
   methods: {
     ...mapActions([
       'setActiveSlide',
+      'addUser',
     ]),
+    enterSetup() {
+      this.addUser({
+        name: this.name,
+        items: {
+          cups: 0,
+          shots: 0,
+        },
+        owner: true,
+      });
+      this.setActiveSlide('setup');
+    },
   },
 };
 </script>
