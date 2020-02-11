@@ -14,6 +14,7 @@
                 <input
                 v-model="name"
                 type="text"
+                @keydown.enter="addNewUser"
             />
                 <button
                 type="button"
@@ -22,6 +23,7 @@
                 </button>
             </li>
         </ul>
+        <button @click="setActiveSlide('game')">Los gehts</button>
     </div>
 </template>
 <script>
@@ -45,16 +47,19 @@ export default {
   methods: {
     ...mapActions([
       'addUser',
+      'setActiveSlide',
     ]),
     addNewUser() {
-      this.addUser({
-        name: this.name,
-        items: {
-          cups: 0,
-          shots: 0,
-        },
-      });
-      this.name = '';
+      if (this.name) {
+        this.addUser({
+          name: this.name,
+          items: {
+            cups: 0,
+            shots: 0,
+          },
+        });
+        this.name = '';
+      }
     },
   },
 };

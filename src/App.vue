@@ -10,12 +10,14 @@
 import { mapGetters } from 'vuex';
 import home from './components/home/home.vue';
 import setup from './components/setup/setup.vue';
+import game from './components/game/game.vue';
 
 export default {
   name: 'app',
   components: {
     home,
     setup,
+    game,
   },
   computed: {
     ...mapGetters([

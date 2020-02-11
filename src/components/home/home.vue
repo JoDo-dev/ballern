@@ -3,15 +3,18 @@
         <div class="home__headline">
             <h1>Ballern, das Partyspiel!</h1>
         </div>
-        <form>
-            <label>
-                <div>Dein Name</div>
-                <input type="text" v-model="name"/>
-            </label>
-            <div>
-                <button type="button" @click="enterSetup">Los geht´s</button>
-            </div>
-        </form>
+          <label>
+              <div>Dein Name</div>
+              <input
+                type="text"
+                placeholder="Dein Name"
+                v-model="name"
+                @keydown.enter="enterSetup"
+              />
+          </label>
+          <div>
+              <button type="button" @click="enterSetup">Los geht´s</button>
+          </div>
     </div>
 </template>
 <script>
@@ -21,7 +24,7 @@ export default {
   name: 'home',
   data() {
     return {
-      name: 'Dein Name',
+      name: '',
     };
   },
   methods: {
@@ -30,15 +33,17 @@ export default {
       'addUser',
     ]),
     enterSetup() {
-      this.addUser({
-        name: this.name,
-        items: {
-          cups: 0,
-          shots: 0,
-        },
-        owner: true,
-      });
-      this.setActiveSlide('setup');
+      if (this.name) {
+        this.addUser({
+          name: this.name,
+          items: {
+            cups: 0,
+            shots: 0,
+          },
+          owner: true,
+        });
+        this.setActiveSlide('setup');
+      }
     },
   },
 };
