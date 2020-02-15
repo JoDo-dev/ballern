@@ -23,7 +23,7 @@
         </label>
         <div>
             <NextButton
-              :type="button"
+              type="button"
               @clicked="enterSetup">
                 Los geht´s
             </NextButton>

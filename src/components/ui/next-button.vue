@@ -13,8 +13,10 @@
 export default {
   name: 'NextButton',
   props: {
-    type: String,
-    default: () => 'button',
+    type: {
+      type: String,
+      default: () => 'button',
+    },
   },
   methods: {
     clicked() {
