@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition name="silde">
+    <transition name="silde" mode="in-out">
       <compontent :is="getActiveSlide" />
     </transition>
   </div>
@@ -28,6 +28,16 @@ export default {
 </script>
 
 <style lang="scss">
+html, body {
+padding: 0;
+margin: 0;
+}
+h1,h2,h3 {
+  margin-top: 0;
+}
+* {
+  box-sizing: border-box;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -35,5 +45,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  max-width: 375px;
+  min-width: 320px;
+  min-height: 600px;
+  max-height: 100vh;
+  height: 812px;
+  overflow: hidden;
+  margin: auto;
 }
 </style>
