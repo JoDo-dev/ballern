@@ -4,7 +4,7 @@
             <h1>Hallo, {{MainUser[0].name}}!</h1>
             <p>Alleine Ballern macht Dumm! Also füge noch ein paar Freunde hinzu.</p>
         </div>
-        <ul>
+        <ul class="setup__user__list">
             <li
               :key="user.name"
               class="setup__user"
@@ -117,5 +117,18 @@ export default {
   color: #aaaaaa;
   width: 100%;
   height: 100%;
+}
+.setup__user__input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  box-shadow: none;
+}
+.setup__user__list {
+  max-height: 500px;
+  overflow-y: auto;
+  height: auto;
 }
 </style>
