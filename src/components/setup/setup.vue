@@ -4,36 +4,39 @@
             <h1>Hallo, {{MainUser[0].name}}!</h1>
             <p>Alleine Ballern macht Dumm! Also füge noch ein paar Freunde hinzu.</p>
         </div>
-        <ul class="setup__user__list">
-            <li
-              :key="user.name"
-              class="setup__user"
-              v-for="user in getUsers"
-            >
-                {{user.name}}
-            </li>
-            <li
-              class="setup__user setup__user--input"
-            >
-                <input
-                v-if="createUser"
-                v-model="name"
-                class="setup__user__input"
-                type="text"
-                @keydown.enter="addNewUser"
-            />
-                <button
-                  v-if="!createUser"
-                  type="button"
-                  class="setup__user__button"
-                  @click="createUser = true"
-                >
-                    +
-                </button>
-            </li>
-        </ul>
+        <div class="setup__user__list__wrapper">
+          <ul class="setup__user__list">
+              <li
+                :key="user.name"
+                class="setup__user"
+                v-for="user in getUsers"
+              >
+                  {{user.name}}
+              </li>
+              <li
+                class="setup__user setup__user--input"
+              >
+                  <input
+                  v-if="createUser"
+                  v-model="name"
+                  class="setup__user__input"
+                  type="text"
+                  @keydown.enter="addNewUser"
+              />
+                  <button
+                    v-if="!createUser"
+                    type="button"
+                    class="setup__user__button"
+                    @click="createUser = true"
+                  >
+                      +
+                  </button>
+              </li>
+          </ul>
+        </div>
         <NextButton
           type="button"
+          class="setup__button"
           @clicked="enterGame">
             Los geht´s
         </NextButton>
@@ -92,7 +95,14 @@ export default {
 .setup__container {
   padding: 1rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+}
+.setup__text {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
 }
  .setup__user {
     margin: 0;
@@ -106,6 +116,7 @@ export default {
     &--input {
       text-align: center;
       font-weight: bold;
+      margin-bottom: 30px;
     }
   }
 .setup__user__button {
@@ -127,8 +138,32 @@ export default {
   box-shadow: none;
 }
 .setup__user__list {
-  max-height: 500px;
+  overflow: hidden;
   overflow-y: auto;
+}
+.setup__user__list__wrapper {
+  overflow: hidden;
+  flex-direction: column;
   height: auto;
+  display: flex;
+  position: relative;
+  flex: 1;
+  margin-bottom: 20px;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(180deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,1) 100%
+    );
+  }
+}
+
+.setup__button {
+  display: flex;
+  flex: 0 0 auto;
 }
 </style>

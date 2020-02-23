@@ -42,6 +42,9 @@ ul, ul li {
   padding: 0;
   margin: 0;
 }
+p {
+  margin: 0 0 20px;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
