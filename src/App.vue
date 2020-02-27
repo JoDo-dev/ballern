@@ -45,6 +45,12 @@ ul, ul li {
 p {
   margin: 0 0 20px;
 }
+input, textarea, button {
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+  outline: none;
+  border: none;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

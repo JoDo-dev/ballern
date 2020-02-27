@@ -113,7 +113,7 @@ export default {
   text-align: center;
 
   &--desktop{
-    font-size: calc(100vw / 15);
+    font-size: calc(100vw / 20);
   }
 }
 </style>

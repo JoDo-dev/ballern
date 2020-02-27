@@ -19,15 +19,17 @@
                   <input
                   v-if="createUser"
                   v-model="name"
+                  ref="memberinput"
                   class="setup__user__input"
                   type="text"
                   @keydown.enter="addNewUser"
+                  @blur="addNewUser"
               />
                   <button
                     v-if="!createUser"
                     type="button"
                     class="setup__user__button"
-                    @click="createUser = true"
+                    @click="create"
                   >
                       +
                   </button>
@@ -70,6 +72,11 @@ export default {
       'addUser',
       'setActiveSlide',
     ]),
+    async create() {
+      this.createUser = true;
+      await this.createUser;
+      this.$refs.memberinput.focus();
+    },
     addNewUser() {
       if (this.name) {
         this.addUser({
