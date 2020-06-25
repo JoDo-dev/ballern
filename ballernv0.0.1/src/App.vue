@@ -1,80 +1,42 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <div>{{getLoggedIn ? 'Eingelogged' : 'Ausgelogged'}}</div>
+      <button v-if="getLoggedIn" @click="signOut">Abmelden</button>
     </div>
     <router-view/>
-    <input type="text" v-model="sessionID" />
-    <button @click="signIn">Anmelden</button>
-    <button @click="signOut">Abmelden</button>
   </div>
 </template>
 <script>
-import firebase from 'firebase'
-
+import { mapGetters, mapActions } from 'vuex';
 export default {
-  data () {
-    return {
-      sessionID: '',
-      user: {
-        id: ''
-      }
-    }
-  },
-  created () {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in.
-        const uid = user.uid
-        this.user.id = uid
-        console.log('logIn' + user.uid)
-        this.getSession()
-        // ...
-      } else {
-        // User is signed out.
-        console.log('LogOut')
-        // ...
-      }
-      // ...
-    })
-  },
-  destroyed () {
-    this.signOut()
-  },
-  methods: {
-    signIn () {
-      firebase.auth().signInAnonymously().catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code
-        var errorMessage = error.message
-        // ...
-        console.log(errorCode, errorMessage)
-      })
+    name: 'App',
+    computed: {
+        ...mapGetters([
+            'getLoggedIn'
+        ])
     },
-    signOut () {
-      firebase.auth().signOut()
-    },
-    getSession () {
-      if (this.sessionID.length) {
-        const session = firebase.firestore().collection('sessions').doc(this.sessionID)
-        session.get().then((res) => {
-          if (res.exists) {
-            console.log('data: ' + res.data())
-          } else {
-            alert('Session nicht gefunden')
-          }
-        })
-      } else {
-        alert('Bitte SessionID eingeben')
-      }
+    methods: {
+        ...mapActions([
+            'signOut'
+        ])
     }
-  }
-
-}
+};
 </script>
 
 <style lang="scss">
+@import '~@/assets/vars.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background: $primary;
+  font-size: 14pt;
+  padding: 0;
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -84,7 +46,14 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: $margin-normal;
+  justify-content: flex-end;
 
   a {
     font-weight: bold;
